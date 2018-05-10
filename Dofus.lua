@@ -21,15 +21,19 @@ local function getCota(nombre)
 
 	if res.code == 200 then
 		local linea
+
 		for s in body:gmatch("[^\r\n]+") do
 		   	if string.find(s, subnombre .. "<%/a%>") then linea = s end
 		end
+
 		if linea then
 			local inicio, fin = string.find(linea, "%/es%/mmorpg%/comunidad%/directorios%/paginas%-personajes%/%d+%-" .. string.lower(subnombre))
 			local url = string.sub(linea, inicio, fin)
+
 			p("Profile URL found: " .. url)
 
 			local res, body = request("GET", DOFUS_URL .. url, HEADERS)
+			
 			if res.code == 200 then
 				local linea
 				for s in body:gmatch("[^\r\n]+") do
@@ -61,7 +65,6 @@ if args[2] then
 	coroutine.wrap(function()
 		p(getCota(args[2]))
 	end)()
-	
 else
 	p("Please use a name.")
 end
