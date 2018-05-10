@@ -8,4 +8,5 @@ A light-weight lua script to get Dofus Ladder's data given a name.
 - Open cmd, cd to the path and run 'luvit Dofus <Name>' without <>.
   
   
-https://i.imgur.com/cF0PC79.png
+![Example](https://i.imgur.com/cF0PC79.png)
+
