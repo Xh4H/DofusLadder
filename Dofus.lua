@@ -1,5 +1,3 @@
-local discordia = require("discordia")
-local client = discordia.Client()
 local request = require("coro-http").request
 
 local DOFUS_URL = "https://www.dofus.com/"
