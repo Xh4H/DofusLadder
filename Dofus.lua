@@ -1,7 +1,7 @@
 local request = require("coro-http").request
 
 local DOFUS_URL = "https://www.dofus.com/"
-local BASE_URL = DOFUS_URL .. "es/mmorpg/comunidad/directorios/paginas-personajes?TEXT=%s"
+local FULL_ULR = DOFUS_URL .. "es/mmorpg/comunidad/directorios/paginas-personajes?TEXT=%s"
 local f = string.format
 
 local HEADERS = {
@@ -14,7 +14,7 @@ local HEADERS = {
 
 local function getCota(nombre)
 	local cotas = {}
-	local res, body = request("GET", f(BASE_URL, nombre), HEADERS)
+	local res, body = request("GET", f(FULL_ULR, nombre), HEADERS)
 	local subnombre = string.gsub(nombre, "%-", "%%-")
 
 	p("Searching data for " .. args[2])
@@ -23,7 +23,7 @@ local function getCota(nombre)
 		local linea
 
 		for s in body:gmatch("[^\r\n]+") do
-		   	if string.find(s, subnombre .. "<%/a%>") then linea = s end
+		   	if string.find(s, subnombre .. "<%/a%>") then linea = s end -- wait for latest one
 		end
 
 		if linea then
