@@ -18,7 +18,6 @@ local function getCota(nombre)
 	local subnombre = string.gsub(nombre, "%-", "%%-")
 
 	p("Searching data for " .. args[2])
-
 	if res.code == 200 then
 		local linea
 
@@ -29,16 +28,17 @@ local function getCota(nombre)
 		if linea then
 			local inicio, fin = string.find(linea, "%/es%/mmorpg%/comunidad%/directorios%/paginas%-personajes%/%d+%-" .. string.lower(subnombre))
 			local url = string.sub(linea, inicio, fin)
-
-			p("Profile URL found: " .. url)
-
 			local res, body = request("GET", DOFUS_URL .. url, HEADERS)
+			
+			p("Profile URL found: " .. url)
 			
 			if res.code == 200 then
 				local linea
+				
 				for s in body:gmatch("[^\r\n]+") do
 					if string.find(s, "Cota") then linea = s end
 				end
+				
 				if linea then
 					local solo3v3 = linea:match("Cota de Koliseo 3v3 solo%: %<span%>%d %d+%<%/span%>")
 					local team3v3 = linea:match("Cota de Koliseo 3v3 por equipos%: %<span%>%d %d+%<%/span%>")
