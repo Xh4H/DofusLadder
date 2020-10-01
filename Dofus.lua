@@ -18,7 +18,9 @@ local function getCota(nombre)
 	local subnombre = string.gsub(nombre, "%-", "%%-")
 
 	p("Searching data for " .. args[2])
+	
 	if res.code == 200 then
+		
 		local linea
 
 		for s in body:gmatch("[^\r\n]+") do
